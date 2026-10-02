@@ -37,6 +37,9 @@
             const form = document.getElementById('application-form');
             const list = document.getElementById('applications-list');
 
+            // Tracks whether we're currently editing an existing entry (holds its id) or not (null)
+            let editingId = null;
+
             // Function that reads localStorage and redraws the list
             function renderApplications() {
                 const applications = JSON.parse(localStorage.getItem('applications') || '[]');
@@ -45,10 +48,27 @@
                     const li = document.createElement('li');
                     li.textContent = `${app.company} - ${app.role} - ${app.status} - ${app.dateApplied}`;
 
+                    // create an edit button for this specific entry
+                    const editBtn = document.addEventListener('button');
+                    editBtn.textContent = 'Edit';
+                    editBtn.dataset.id = app.id; // store the id on the button itself
+
+                    editBtn.addEventListener('click', function() {
+                        // Pre-fill the form wiht this application's current values
+                        document.getElementById('company').value = app.company;
+                        document.getElementById('role').value = app.role;
+                        document.getElementById('dateApplied').value = app.dateApplied;
+                        document.getElementById('status').value = app.status;
+
+                        // Remember that we're editing this specific entry
+                        editingId = app.id;
+                    });
+
+
                     // create a delete button for this specific entry
                     const deleteBtn = document.createElement('button');
                     deleteBtn.textContent = 'Delete';
-                    deleteBtn.dataset.id = app.id; // stored the id on the button itself
+                    deleteBtn.dataset.id = app.id; // store the id on the button itself
 
                     // when clicked, remove this application and re-render
                     deleteBtn.addEventListener('click', function() {
@@ -60,6 +80,7 @@
                     renderApplications();
                     });
 
+                    li.appendChild(editBtn);
                     li.appendChild(deleteBtn);
                     list.appendChild(li);
                 });

@@ -49,7 +49,7 @@
                     li.textContent = `${app.company} - ${app.role} - ${app.status} - ${app.dateApplied}`;
 
                     // create an edit button for this specific entry
-                    const editBtn = document.addEventListener('button');
+                    const editBtn = document.createElement('button');
                     editBtn.textContent = 'Edit';
                     editBtn.dataset.id = app.id; // store the id on the button itself
 

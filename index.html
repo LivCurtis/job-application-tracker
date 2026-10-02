@@ -7,34 +7,46 @@
         <h1>Job Application Tracker</h1>
 
         <!-- form will go here-->
-         <form>
-            <form id="application-form">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" required>
+        <form id="application-form">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" required>
 
-            <label for="role">Role</label>
-            <input type="text" id="role" name="role" required>
+        <label for="role">Role</label>
+        <input type="text" id="role" name="role" required>
 
-            <label for="dateApplied">Date Applied</label>
-            <input type="date" id="dateApplied" name="dateApplied" required>
+        <label for="dateApplied">Date Applied</label>
+        <input type="date" id="dateApplied" name="dateApplied" required>
 
-            <label for="status">Status</label>
-            <select id="status" name=""status>
-                <option value="applied">Applied</option>
-                <option value="interview">Interview</option>
-                <option value="rejected">Rejected</option>
-                <option value="offer">Offer</option>
-            </select>
+        <label for="status">Status</label>
+        <select id="status" name="status">
+            <option value="applied">Applied</option>
+            <option value="interview">Interview</option>
+            <option value="rejected">Rejected</option>
+            <option value="offer">Offer</option>
+        </select>
 
-            <button type="submit">Add application</button>
+        <button type="submit">Add application</button>
         </form>
 
         <!-- list will go here-->
+        <ul id="applications-list"></ul>
 
         <script>
             // JS will go here
-            // Grab a reference to the <form> element so we can listen for its submit event
+            // Grab references to the form and list elements
             const form = document.getElementById('application-form');
+            const list = document.getElementById('applications-list');
+
+            // Function that reads localStorage and redraws the list
+            function renderApplications() {
+                const applications = JSON.parse(localStorage.getItem('applications') || '[]');
+                list.innerHTML = '';
+                applications.forEach(function(app) {
+                    const li = document.createElement('li');
+                    li.textContent = `${app.company} - ${app.role} - ${app.status} - ${app.dateApplied}`;
+                    list.appendChild(li);
+                });
+            }
 
             // Run this function every time the form is submitted
             form.addEventListener('submit', function(event) {
@@ -62,9 +74,11 @@
                 // JSON.stringify converts the array back into a string, since that's all localStorage an hold
                 localStorage.setItem('applications', JSON.stringify(applications));
 
-                // Temporary check - lets us see the array building up correctly in the browser console
-                console.log(applications);
+                renderApplications(); // redraw the list with the new array entry included
             });
+
+            // Call once immediately, so saved entries show up when the page first loads
+            renderApplications();
         </script>
     </body>
 </html>

@@ -50,7 +50,7 @@
                     status: document.getElementById('status').value              // whichever option is selected from the dropdown
                 };
 
-                // Load whichever's already saved in localStorage under the key 'applications'
+                // Load whatever's already saved in localStorage under the key 'applications'
                 // localStorage only stored strings, so we parse it back into a real array
                 // If nothing's been saved yet (i.e. first time running), default to an empty array '[]'
                 const applications = JSON.parse(localStorage.getItem('applications') || '[]');

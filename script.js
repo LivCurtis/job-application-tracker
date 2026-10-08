@@ -19,7 +19,7 @@ function renderApplications() {
         editBtn.dataset.id = app.id; // store the id on the button itself
 
         editBtn.addEventListener('click', function() {
-            // Pre-fill the form wiht this application's current values
+            // Pre-fill the form with this application's current values
             document.getElementById('company').value = app.company;
             document.getElementById('role').value = app.role;
             document.getElementById('dateApplied').value = app.dateApplied;
@@ -63,29 +63,32 @@ form.addEventListener('submit', function(event) {
 
     if (editingId) {
         // We're editing an existing entry - find it and update its fields in place
-        const appToEdit = applications.find(funcation(a) {
+        const appToEdit = applications.find(function(a) {
             return a.id === editingId;
         });
         appToEdit.company = document.getElementById('company').value;
-    }
+        appToEdit.role = document.getElementById('role').value;
+        appToEdit.dateApplied = document.getElementById('dateApplied').value;
+        appToEdit.status = document.getElementById('status').value;
 
-
-    // Build an object representing this one application, using values pulled from each input
-    const newApplication = {
+        editingId = null; // done editing
+    } else {
+        // Build an object representing this one application, using values pulled from each input
+        const newApplication = {
         id: crypto.randomUUID(),                                    // generates a unique ID for this entry
         company: document.getElementById('company').value,          // text typed into the Company input
         role: document.getElementById('role').value,                // text typed into the Role input
         dateApplied: document.getElementById('dateApplied').value,   // the date picked in the date input
         status: document.getElementById('status').value              // whichever option is selected from the dropdown
-    };
-
-    // Add the new application object onto the end of that array
-    applications.push(newApplication);
+        };
+        // Add the new application object onto the end of that array
+        applications.push(newApplication);
+    }
 
     // Save the updated array back to localStorage
     // JSON.stringify converts the array back into a string, since that's all localStorage an hold
     localStorage.setItem('applications', JSON.stringify(applications));
-
+    form.reset();
     renderApplications(); // redraw the list with the new array entry included
 });
 

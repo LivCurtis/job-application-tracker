@@ -24,6 +24,7 @@ h1 {
 
 .layout ul#applications-list {
   flex: 1; /* list takes up the remaining space */
+  min-width: 500px; /* stops it shrinking below this, so entries fit on one line */
 }
 
 /* Form layout */

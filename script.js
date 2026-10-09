@@ -1,6 +1,7 @@
 // Grab references to the form and list elements
 const form = document.getElementById('application-form');
 const list = document.getElementById('applications-list');
+const submitBtn = form.querySelector('button[type="submit"]');
 
 // Tracks whether we're currently editing an existing entry (holds its id) or not (null)
 let editingId = null;
@@ -34,6 +35,9 @@ function renderApplications() {
             document.getElementById('role').value = app.role;
             document.getElementById('dateApplied').value = app.dateApplied;
             document.getElementById('status').value = app.status;
+
+            // Update the text of form submission button from 'Add' --> 'Update'
+            submitBtn.textContent = 'Update application';
 
             // Remember that we're editing this specific entry
             editingId = app.id;
@@ -82,6 +86,9 @@ form.addEventListener('submit', function(event) {
         appToEdit.status = document.getElementById('status').value;
 
         editingId = null; // done editing
+
+        // Reset text of form submission button from'Update' --> 'Add'
+        submitBtn.textContent = 'Add application';
     } else {
         // Build an object representing this one application, using values pulled from each input
         const newApplication = {

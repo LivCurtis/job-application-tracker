@@ -12,6 +12,20 @@ h1 {
   margin-bottom: 20px;
 }
 
+.layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.layout form {
+  flex: 0 0 300px; /* fixed-ish width for the form */
+}
+
+.layout ul#applications-list {
+  flex: 1; /* list takes up the remaining space */
+}
+
 /* Form layout */
 form {
   display: flex;

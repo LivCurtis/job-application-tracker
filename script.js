@@ -12,6 +12,12 @@ function renderApplications() {
     list.innerHTML = '';
     applications.forEach(function(app) {
         const li = document.createElement('li');
+
+        // Grey out rejected applications
+        if (app.status === 'rejected'){
+            li.classList.add('rejected');
+        }
+
         // Build the fixed details (company, role, date) as plain text
         const details = document.createElement('span');
         details.textContent = `${app.company} - ${app.role} - ${app.dateApplied}`;

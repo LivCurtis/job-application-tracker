@@ -98,3 +98,7 @@ ul#applications-list li button {
   margin-left: auto; /* pushes it to sit just before the buttons */
   margin-right: 12px;
 }
+
+li.rejected {
+  opacity: 0.5;
+}

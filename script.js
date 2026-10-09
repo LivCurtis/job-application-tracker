@@ -11,7 +11,17 @@ function renderApplications() {
     list.innerHTML = '';
     applications.forEach(function(app) {
         const li = document.createElement('li');
-        li.textContent = `${app.company} - ${app.role} - ${app.status} - ${app.dateApplied}`;
+        // Build the fixed details (company, role, date) as plain text
+        const details = document.createElement('span');
+        details.textContent = `${app.company} - ${app.role} - ${app.dateApplied}`;
+
+        // Build the status separately so we can style individually as this field is subject to change
+        const statusSpan = document.createElement('span');
+        statusSpan.textContent = app.status;
+        statusSpan.classList.add('status-label')
+
+        li.appendChild(details);
+        li.appendChild(statusSpan)
 
         // create an edit button for this specific entry
         const editBtn = document.createElement('button');

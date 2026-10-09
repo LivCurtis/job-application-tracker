@@ -91,3 +91,10 @@ ul#applications-list li button {
   background: white;
   cursor: pointer;
 }
+
+.status-label {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: auto; /* pushes it to sit just before the buttons */
+  margin-right: 12px;
+}

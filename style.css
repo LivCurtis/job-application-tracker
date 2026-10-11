@@ -92,11 +92,40 @@ ul#applications-list li button {
   cursor: pointer;
 }
 
+/* Base styling shared by all status labels */
 .status-label {
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-left: auto; /* pushes it to sit just before the buttons */
-  margin-right: 12px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: 12px;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+/* Red: rejected applications */
+.status-rejected {
+    color: #b42318;
+    background-color: #fee4e2;
+}
+
+/* Green: job offers */
+.status-offer {
+    color: #067647;
+    background-color: #d1fadf;
+}
+
+/* Blue: interviews */
+.status-interview {
+    color: #175cd3;
+    background-color: #d1e9ff;
+}
+
+/* Yellow: applications submitted */
+.status-applied {
+    color: #854d0e;
+    background-color: #fef0c7;
 }
 
 li.rejected {

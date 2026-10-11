@@ -24,8 +24,15 @@ function renderApplications() {
 
         // Build the status separately so we can style individually as this field is subject to change
         const statusSpan = document.createElement('span');
+
+        // Display the status in uppercase
         statusSpan.textContent = app.status;
-        statusSpan.classList.add('status-label')
+
+        // Add the shared styling to every status
+        statusSpan.classList.add('status-label');
+
+        // Add a specific class based on the current status
+        statusSpan.classList.add(`status-${app.status}`);
 
         li.appendChild(details);
         li.appendChild(statusSpan)
